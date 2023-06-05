@@ -195,65 +195,6 @@ update' state BackToNotLoaded =
 update' state ResetBoard =
   Transition (state { board = initialBoard }) (pure Nothing)
 
--- update' state ButtonClicked = _wd
-styles = mconcat [
-  ".ballsCell {",
-  "background-size: 100% 100%; ",
-  "padding: 30px; ",
-  "font-size: 30px; ",
-  "border: 5px inset black; ",
-  "background-color: white; ",
-  "transition-property: background-color; ",
-  "transition-duration: 0.2s; ",
-  "}",
-  "\n",
-  ".currentCell {",
-  "background-color: rgb(173,216,230); ",
-  " }",
-  "\n",
-  ".failure { ",
-  "color: red; ",
-  "font-size: 30px; ",
-  "}",
-  "\n",
-  ".sourceCode { ",
-  "font-size: 30px; ",
-  "}",
-  "\n",
-  "textview.view.parseError {",
-  "padding-left: 0px; ",
-  "animation-name: horizontal-shaking; ",
-  "animation-duration: 0.5s;", 
-  "animation-timing-function: linear;",
-  "animation-iteration-count: 1;",
-  "}",
-  "\n",
-  "@keyframes horizontal-shaking {",
-  "\n",
-  "0% { padding-left: 0px }","\n",
-  "15% { padding-left: 30px }","\n",
-  "30% { padding-left: 0px }","\n",
-  "45% { padding-left: 20px }","\n",
-  "60% { padding-left: 0px }","\n",
-  "75% { padding-left: 10px }","\n",
-  "100% { padding-left: 0px }","\n",
- "}","\n",
- "textview.view.parseError text {",
-  "animation-name: horizontal-shaking-text; ",
-  "animation-duration: 0.5s;", 
-  "animation-timing-function: linear;",
-  "animation-iteration-count: 1;",
-  "}",
-  "\n",
-  "@keyframes horizontal-shaking-text {",
-  "\n",
-  "0% { color: black }","\n",
-  "15% { color: red }","\n",
-  "85% { color: red }","\n",
-  "100% { color: black }","\n",
- "}","\n"
-  ]
-
 ballWithText :: String -> String -> Widget event
 ballWithText color quantity = container Box [#homogeneous := True] [
     BoxChild defaultBoxChildProperties { expand = True, fill = True } $
@@ -270,7 +211,8 @@ main = do
   void $ Gtk.init Nothing
   screen <- maybe (fail "No screen?!") return =<< Gdk.screenGetDefault
   cssProvider      <- Gtk.cssProviderNew
-  Gtk.cssProviderLoadFromData cssProvider styles
+  cssStyles <- readFile "assets/styles.css"
+  Gtk.cssProviderLoadFromData cssProvider (fromString cssStyles)
   Gtk.styleContextAddProviderForScreen
     screen
     cssProvider

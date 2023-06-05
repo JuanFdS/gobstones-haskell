@@ -1,0 +1,54 @@
+.ballsCell {
+    background-size: 100% 100%;
+    padding: 30px;
+    font-size: 30px;
+    border: 5px inset black;
+    background-color: white;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+  }
+  
+  .currentCell {
+    background-color: rgb(173, 216, 230);
+  }
+  
+  .failure {
+    color: red;
+    font-size: 30px;
+  }
+  
+  .sourceCode {
+    font-size: 30px;
+  }
+  
+  textview.view.parseError {
+    padding-left: 0px;
+    animation-name: horizontal-shaking;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+  }
+  
+  @keyframes horizontal-shaking {
+    0% { padding-left: 0px }
+    15% { padding-left: 30px }
+    30% { padding-left: 0px }
+    45% { padding-left: 20px }
+    60% { padding-left: 0px }
+    75% { padding-left: 10px }
+    100% { padding-left: 0px }
+  }
+  
+  textview.view.parseError text {
+    animation-name: horizontal-shaking-text;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+  }
+  
+  @keyframes horizontal-shaking-text {
+    0% { color: black }
+    15% { color: red }
+    85% { color: red }
+    100% { color: black }
+  }
