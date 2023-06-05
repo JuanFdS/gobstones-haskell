@@ -1,6 +1,0 @@
-program {
-    Mover(Norte)
-    Poner(Negro)
-    Mover(Este)
-    Poner(Rojo)
-}
